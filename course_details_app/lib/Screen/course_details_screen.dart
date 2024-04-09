@@ -550,7 +550,6 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                               scrollDirection: Axis.vertical,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                //mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   const Text(
                                     'Course Curriculum',
@@ -560,11 +559,6 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  // const SizedBox(height: 5),
-                                  //
-                                  //
-                                  //
-                                  //
                                   ..._controller.courseData['sections']
                                       .asMap()
                                       .entries
@@ -584,10 +578,10 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                       children: [
                                         Container(
                                           alignment: Alignment.center,
-                                          //height: 150,
-                                          margin:
-                                              const EdgeInsets.only(top: 10),
-                                          padding: const EdgeInsets.all(10),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 15, vertical: 10),
+                                          margin: const EdgeInsets.only(
+                                              top: 10, left: 10, right: 10),
                                           decoration: BoxDecoration(
                                             color: const Color.fromARGB(
                                                 255, 250, 251, 252),
@@ -660,10 +654,6 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                               ),
                                               if (isDescriptionVisible)
                                                 SizedBox(
-                                                  // height: MediaQuery.of(context)
-                                                  //         .size
-                                                  //         .height *
-                                                  //     0.8,
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width *
@@ -679,7 +669,6 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                     ),
                                                   ),
                                                 ),
-                                              // const SizedBox(height: 20),
                                               Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -698,19 +687,9 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                             ],
                                           ),
                                         ),
-                                        //
-                                        //
-                                        //
-                                        //
-                                        //
                                       ],
                                     );
                                   }).toList(),
-
-                                  //
-                                  //
-                                  //
-
                                   if (_controller
                                           .courseData['sections'].length >
                                       4)
