@@ -982,7 +982,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                     ),
                                     const SizedBox(width: 10),
                                     const Text(
-                                      '34.5 total hours on-demand video',
+                                      '0.34 total hours on-demand video',
                                       style: TextStyle(
                                         color: Color.fromRGBO(51, 51, 51, 1),
                                         fontFamily: 'Poppins',
@@ -1018,7 +1018,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                     ),
                                     const SizedBox(width: 10),
                                     const Text(
-                                      '10 Articles',
+                                      '5 Articles',
                                       style: TextStyle(
                                         color: Color.fromRGBO(51, 51, 51, 1),
                                         fontFamily: 'Poppins',
