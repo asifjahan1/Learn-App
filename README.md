@@ -1,7 +1,7 @@
 # Learn-App
 
 # <span style="font-size:larger;">Video</span>
-<img width="250" src="https://github.com/asifjahan1/Learn-App/assets/54774661/48e02ec8-6378-4d58-acab-592e74150869">
+<img width="300" src="https://github.com/asifjahan1/Learn-App/assets/54774661/90a048fa-c398-49df-83f9-2644ccabaead">
 
 # <span style="font-size:larger;">Screenshots</span>
 
