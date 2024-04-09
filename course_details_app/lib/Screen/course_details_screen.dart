@@ -581,11 +581,11 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Container(
+                                          // color: Colors.green,
                                           alignment: Alignment.center,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 15, vertical: 10),
-                                          margin: const EdgeInsets.only(
-                                              top: 10, left: 10, right: 10),
+                                          // padding: const EdgeInsets.symmetric(
+                                          //     horizontal: 15, vertical: 10),
+                                          margin: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
                                             color: const Color.fromARGB(
                                                 255, 250, 251, 252),
