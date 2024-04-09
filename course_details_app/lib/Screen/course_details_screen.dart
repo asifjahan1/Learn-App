@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -423,7 +424,8 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                       width: MediaQuery.of(context).size.width *
                                           0.42,
                                       decoration: BoxDecoration(
-                                        color: const Color(0xFFEDEBFA),
+                                        color: const Color.fromARGB(
+                                            255, 245, 244, 248),
                                         border: Border.all(
                                           color: const Color.fromARGB(
                                               255, 133, 94, 251),
@@ -445,7 +447,8 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                       width: MediaQuery.of(context).size.width *
                                           0.43,
                                       decoration: BoxDecoration(
-                                        color: const Color(0xFFEDEBFA),
+                                        color: const Color.fromARGB(
+                                            255, 245, 244, 248),
                                         border: Border.all(
                                           color: const Color.fromARGB(
                                               255, 133, 94, 251),
@@ -505,12 +508,14 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                 fontFamily: 'Poppins',
                                                 fontSize: 18.0,
                                                 fontWeight: FontWeight.w400,
-                                                color: Colors.black54,
+                                                color: Color.fromRGBO(
+                                                    102, 102, 102, 1),
                                                 height: 1.33,
                                               ),
                                               overflow: TextOverflow.clip,
                                             ),
                                           ),
+                                          // const SizedBox(height: 8),
                                         ],
                                       );
                                     }).toList(),
@@ -614,7 +619,9 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                             ? const Color
                                                                 .fromRGBO(
                                                                 163, 53, 243, 1)
-                                                            : Colors.black,
+                                                            : const Color
+                                                                .fromRGBO(
+                                                                51, 51, 51, 1),
                                                       ),
                                                     ),
                                                   ),
@@ -833,7 +840,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                                         .all(
                                                                             8.0),
                                                                 child: Text(
-                                                                  'How Ask for & Provide Information',
+                                                                  'Ask for & Provide Information',
                                                                   style:
                                                                       TextStyle(
                                                                     fontFamily:
@@ -940,7 +947,9 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                       4)
                                     ElevatedButton(
                                       onPressed: () {
-                                        print('Show remaining sections');
+                                        if (kDebugMode) {
+                                          print('Show remaining sections');
+                                        }
                                       },
                                       child: Text(
                                         'Show ${_controller.courseData['sections'].length - 4} more sections',
