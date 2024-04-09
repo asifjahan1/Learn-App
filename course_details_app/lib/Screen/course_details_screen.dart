@@ -261,7 +261,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(height: 5),
+                            const SizedBox(height: 10),
                             Text(
                               '${_controller.courseData['sub_title']}',
                               style: const TextStyle(
