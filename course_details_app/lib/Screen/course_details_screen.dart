@@ -1,7 +1,5 @@
 // ignore_for_file: library_private_types_in_public_api
 
-import 'package:course_details_app/Screen/chewie_list_item.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -644,7 +642,8 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                               .keyboard_arrow_down_rounded,
                                                       color: index == 0
                                                           ? const Color(
-                                                              0xFF7455F7)
+                                                              0xFF7455F7,
+                                                            )
                                                           : const Color
                                                               .fromRGBO(
                                                               102, 102, 102, 1),
@@ -659,16 +658,106 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                           .width *
                                                       0.8,
                                                   child: Container(
-                                                    alignment: Alignment.center,
-                                                    child: Text(
-                                                      description ?? '',
-                                                      style: const TextStyle(
-                                                        fontSize: 14.0,
-                                                        color: Colors.grey,
-                                                      ),
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        // description er age row wise image and text oita
+                                                        Row(
+                                                          children: [
+                                                            SizedBox(
+                                                              height: 12,
+                                                              child:
+                                                                  Image.asset(
+                                                                fit: BoxFit
+                                                                    .contain,
+                                                                alignment: Alignment
+                                                                    .centerLeft,
+                                                                'images/Polygon6.png',
+                                                                width: 50,
+                                                                height: 50,
+                                                              ),
+                                                            ),
+                                                            // const SizedBox(
+                                                            //     width: 10),
+                                                            const Flexible(
+                                                              child: Text(
+                                                                'Course Introduction',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      'Poppins',
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          102,
+                                                                          102,
+                                                                          102,
+                                                                          1),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        const SizedBox(
+                                                            height:
+                                                                10), // Add spacing between image/text and description
+                                                        Text(
+                                                          description ?? '',
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 14.0,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ),
+                                                        if (description !=
+                                                                null &&
+                                                            description
+                                                                    .split(' ')
+                                                                    .length >
+                                                                100)
+                                                          InkWell(
+                                                            onTap: () {
+                                                              setState(() {
+                                                                isDescriptionVisibleList[
+                                                                        index] =
+                                                                    true;
+                                                              });
+                                                            },
+                                                            child:
+                                                                const Padding(
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      vertical:
+                                                                          8.0),
+                                                              child: Text(
+                                                                'Show more',
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .blue,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
+                                              //
+                                              //
+                                              //
+
                                               Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
