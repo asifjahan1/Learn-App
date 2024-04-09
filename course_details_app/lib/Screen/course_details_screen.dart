@@ -274,7 +274,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                               ),
                             ),
 
-                            const SizedBox(height: 5),
+                            const SizedBox(height: 7),
                             Row(
                               children: [
                                 Text(
