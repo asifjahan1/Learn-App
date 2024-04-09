@@ -1,7 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:course_details_app/Screen/chewie_list_item.dart';
-import 'package:course_details_app/Widget/build_container-with_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -51,11 +50,22 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
   final Color imageColor = const Color.fromARGB(255, 116, 85, 247);
 
   bool showMore = false;
+  bool isDescriptionVisible = false;
+  List<bool> isDescriptionVisibleList = [];
+  bool showFullDescription = false;
+
+  // List<bool> isExpanded = [];
 
   @override
   void initState() {
     super.initState();
     _initializeVideoController();
+    if (_controller.courseData['sections'] != null) {
+      isDescriptionVisibleList = List.filled(
+        _controller.courseData['sections'].length,
+        false,
+      );
+    }
   }
 
   void _initializeVideoController() async {
@@ -278,9 +288,9 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                               style: const TextStyle(
                                 fontFamily: 'Poppins',
                                 fontSize: 20.0,
+                                color: Color.fromRGBO(102, 102, 102, 1),
                                 fontWeight: FontWeight.w700,
-                                height: 14.0 /
-                                    20.0, // Calculating line height based on fontSize
+                                height: 14.0 / 20.0,
                                 // textAlign: TextAlign.center,
                               ),
                             ),
@@ -304,6 +314,8 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                       child: Text(
                                         'Buy Now',
                                         style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                         ),
                                       ),
@@ -361,7 +373,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                               ],
                             ),
 
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 15),
 
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -369,10 +381,11 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                 const Text(
                                   "What you'll learn",
                                   style: TextStyle(
-                                    fontSize: 18.0,
+                                    fontSize: 17.5,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
+                                const SizedBox(height: 12),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -445,6 +458,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                               scrollDirection: Axis.vertical,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                //mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   const Text(
                                     'Course Curriculum',
@@ -454,20 +468,31 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  // const SizedBox(height: 5),
+                                  //
+                                  //
+                                  //
+                                  //
                                   ..._controller.courseData['sections']
                                       .asMap()
                                       .entries
                                       .map<Widget>((entry) {
                                     final int index = entry.key;
                                     final section = entry.value;
-                                    final description =
-                                        section['description'] ?? '';
-                                    final lessons = section['lessons'] ?? [];
+                                    final description = section['description'];
+                                    final lessons = section['lessons'];
+                                    final bool isDescriptionVisible =
+                                        isDescriptionVisibleList.length > index
+                                            ? isDescriptionVisibleList[index]
+                                            : false;
+
                                     return Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Container(
+                                          alignment: Alignment.center,
+                                          //height: 150,
                                           margin:
                                               const EdgeInsets.only(top: 10),
                                           padding: const EdgeInsets.all(10),
@@ -510,11 +535,27 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                   ),
                                                   IconButton(
                                                     onPressed: () {
-                                                      // Add your onPressed logic here
+                                                      setState(() {
+                                                        // Toggle the visibility of the description part
+                                                        if (isDescriptionVisibleList
+                                                                .length >
+                                                            index) {
+                                                          isDescriptionVisibleList[
+                                                                  index] =
+                                                              !isDescriptionVisibleList[
+                                                                  index];
+                                                        } else {
+                                                          isDescriptionVisibleList
+                                                              .add(true);
+                                                        }
+                                                      });
                                                     },
                                                     icon: Icon(
-                                                      Icons
-                                                          .keyboard_arrow_down_rounded,
+                                                      isDescriptionVisible
+                                                          ? Icons
+                                                              .keyboard_arrow_up_rounded
+                                                          : Icons
+                                                              .keyboard_arrow_down_rounded,
                                                       color: index == 0
                                                           ? const Color(
                                                               0xFF7455F7)
@@ -525,14 +566,28 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                   ),
                                                 ],
                                               ),
-                                              Text(
-                                                description,
-                                                style: const TextStyle(
-                                                  fontSize: 14.0,
-                                                  color: Colors.black54,
+                                              if (isDescriptionVisible)
+                                                SizedBox(
+                                                  // height: MediaQuery.of(context)
+                                                  //         .size
+                                                  //         .height *
+                                                  //     0.8,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.8,
+                                                  child: Container(
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      description ?? '',
+                                                      style: const TextStyle(
+                                                        fontSize: 14.0,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                              const SizedBox(height: 10),
+                                              // const SizedBox(height: 20),
                                               Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -551,9 +606,19 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                             ],
                                           ),
                                         ),
+                                        //
+                                        //
+                                        //
+                                        //
+                                        //
                                       ],
                                     );
                                   }).toList(),
+
+                                  //
+                                  //
+                                  //
+
                                   if (_controller
                                           .courseData['sections'].length >
                                       4)
@@ -573,33 +638,224 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
 
                             // Display sections here
                             // If more than 4 sections, display 'rest of (number) other sections' button
-                            const Text(
-                              'This course includes:',
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'This course includes',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      height: 16,
+                                      'images/youtube.png',
+                                    ),
+                                    const SizedBox(width: 10),
+                                    const Text(
+                                      '34.5 total hours on-demand video',
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(51, 51, 51, 1),
+                                        fontFamily: 'Poppins',
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      height: 16,
+                                      'images/document 1.png',
+                                    ),
+                                    const SizedBox(width: 10),
+                                    const Text(
+                                      'Support Files',
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(51, 51, 51, 1),
+                                        fontFamily: 'Poppins',
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      height: 16,
+                                      'images/book.png',
+                                    ),
+                                    const SizedBox(width: 10),
+                                    const Text(
+                                      '10 Articles',
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(51, 51, 51, 1),
+                                        fontFamily: 'Poppins',
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      height: 16,
+                                      'images/infinity.png',
+                                    ),
+                                    const SizedBox(width: 10),
+                                    const Text(
+                                      'Full lifetime access',
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(51, 51, 51, 1),
+                                        fontFamily: 'Poppins',
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      height: 16,
+                                      'images/smartphone 1.png',
+                                    ),
+                                    const SizedBox(width: 10),
+                                    const Text(
+                                      'Access on mobile, desktop, and TV',
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(51, 51, 51, 1),
+                                        fontFamily: 'Poppins',
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      height: 16,
+                                      'images/certificate.png',
+                                    ),
+                                    const SizedBox(width: 10),
+                                    const Text(
+                                      'Certificate of completion',
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(51, 51, 51, 1),
+                                        fontFamily: 'Poppins',
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
+                            const SizedBox(height: 70),
                             // Display course details here
-                            const SizedBox(height: 20.0),
-                            const Text(
-                              'Requirements:',
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+
+                            //
+                            //
+                            //
+                            // const SizedBox(height: 20),
+
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Requirements',
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 12),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const ImageIcon(
+                                      AssetImage('images/Ellipse.png'),
+                                      color: Color.fromARGB(255, 116, 85, 247),
+                                      size: 20,
+                                    ),
+                                    const SizedBox(width: 1),
+                                    Flexible(
+                                      child: Text(
+                                        _controller
+                                                .courseData['requirements'] ??
+                                            '',
+                                        style: const TextStyle(
+                                          color: Color.fromRGBO(51, 51, 51, 1),
+                                          fontFamily: 'Poppins',
+                                          fontSize: 14,
+                                          // fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
+
                             // Display course requirements here
                             const SizedBox(height: 20.0),
-                            const Text(
-                              'Descriptions:',
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Description',
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Text(
+                                  showFullDescription
+                                      ? _controller.courseData['description'] ??
+                                          ''
+                                      : _truncateDescription(_controller
+                                              .courseData['description'] ??
+                                          ''),
+                                  style: const TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 17.0,
+                                    color: Color.fromRGBO(102, 102, 102, 1),
+                                  ),
+                                ),
+                                if (_controller
+                                        .courseData['description'].length >
+                                    200) // Adjust the threshold as needed
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        showFullDescription =
+                                            !showFullDescription;
+                                      });
+                                    },
+                                    child: Text(
+                                      showFullDescription
+                                          ? 'Show less'
+                                          : 'Show more',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Color.fromRGBO(116, 85, 247, 1),
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                              ],
                             ),
-                            // Display complete course descriptions here
-                            // Show more button functionality here
                           ],
                         ),
                 ),
@@ -610,4 +866,12 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
       ),
     );
   }
+}
+
+String _truncateDescription(String description) {
+  // Truncate the description to 200 characters
+  if (description.length > 200) {
+    return '${description.substring(0, 200)}...';
+  }
+  return description;
 }
