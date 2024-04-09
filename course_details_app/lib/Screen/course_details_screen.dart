@@ -615,13 +615,20 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                         fontSize: 16.0,
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        color: index == 0
-                                                            ? const Color
-                                                                .fromRGBO(
-                                                                163, 53, 243, 1)
-                                                            : const Color
-                                                                .fromRGBO(
-                                                                51, 51, 51, 1),
+                                                        color:
+                                                            isDescriptionVisible
+                                                                ? const Color
+                                                                    .fromRGBO(
+                                                                    163,
+                                                                    53,
+                                                                    243,
+                                                                    1)
+                                                                : const Color
+                                                                    .fromRGBO(
+                                                                    51,
+                                                                    51,
+                                                                    51,
+                                                                    1),
                                                       ),
                                                     ),
                                                   ),
@@ -648,17 +655,13 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                               .keyboard_arrow_up_rounded
                                                           : Icons
                                                               .keyboard_arrow_down_rounded,
-                                                      color: index == 0
-                                                          ? const Color(
-                                                              0xFF7455F7,
-                                                            )
-                                                          : const Color
-                                                              .fromRGBO(
-                                                              102, 102, 102, 1),
+                                                      color: const Color(
+                                                          0xFF7455F7),
                                                     ),
                                                   ),
                                                 ],
                                               ),
+
                                               if (isDescriptionVisible)
                                                 SizedBox(
                                                   width: MediaQuery.of(context)
