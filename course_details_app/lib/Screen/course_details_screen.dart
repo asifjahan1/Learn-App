@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:course_details_app/Screen/chewie_list_item.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -110,7 +111,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                 onPressed: () {},
                 icon: SizedBox(
                   width: 24,
-                  height: 30,
+                  height: 20,
                   child: Image.asset(
                     'images/align-left.png',
                     color: Colors.white,
@@ -128,8 +129,8 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
               ),
               IconButton(
                 icon: SizedBox(
-                  height: 18,
-                  width: 24,
+                  height: 16.56,
+                  width: 18,
                   child: Image.asset(
                     'images/Vector.png',
                     color: Colors.white,
@@ -170,27 +171,83 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                           children: [
                             Container(
                               width: double.infinity,
-                              height:
-                                  200, // Set the desired height for the video container
+                              height: 160,
                               decoration: BoxDecoration(
-                                color: Colors
-                                    .grey[200], // Example background color
-                                borderRadius: BorderRadius.circular(
-                                    10), // Example border radius
+                                borderRadius: BorderRadius.circular(10),
+                                // gradient: const LinearGradient(
+                                //   begin: Alignment.centerLeft,
+                                //   end: Alignment.centerRight,
+                                //   colors: [
+                                //     Color(0xFF7455F7),
+                                //     Color.fromARGB(255, 73, 66, 103),
+                                //   ],
+                                // ),
                               ),
-                              child: _controller
-                                              .courseData['video_link_path'] !=
-                                          null &&
-                                      _chewieController != null
-                                  ? AspectRatio(
-                                      aspectRatio:
-                                          _videoController.value.aspectRatio,
-                                      child: ChewieListItem(
-                                        videoPlayerController:
-                                            _chewieController!
-                                                .videoPlayerController,
-                                        chewieController: _chewieController!,
-                                      ),
+                              child: _controller.courseData['thumb'] != null
+                                  ? Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.network(
+                                            _controller.courseData['thumb'],
+                                            fit: BoxFit.cover,
+                                            width: double.infinity,
+                                            height: 160,
+                                          ),
+                                        ),
+                                        Positioned.fill(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              gradient: const LinearGradient(
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.topRight,
+                                                colors: [
+                                                  Color.fromRGBO(
+                                                      116, 85, 247, 1),
+                                                  // Color(0xFF7455F7),
+                                                  // Color(0xFF7455F7),
+                                                  Color.fromARGB(
+                                                      255, 121, 107, 185),
+                                                  Colors.transparent,
+                                                  // Color.fromARGB(
+                                                  //     255, 187, 182, 209),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Center(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Stack(
+                                                children: [
+                                                  Image.asset(
+                                                    'images/Group1000005087.png',
+                                                    width: 55,
+                                                    height: 55,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  Positioned(
+                                                    bottom: 3,
+                                                    child: Image.asset(
+                                                      // height: 20,
+                                                      // width: 20,
+                                                      'images/Rectangle 8251.png',
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     )
                                   : Container(),
                             ),
@@ -220,31 +277,67 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                             const SizedBox(height: 5),
                             Row(
                               children: [
+                                Text(
+                                  '${_controller.courseData['category_id']}.0',
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromRGBO(51, 51, 51, 1),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
                                 Image.asset(
                                   'images/stars.png',
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
-                                  _controller.courseData['totalRating'] != null
-                                      ? '${_controller.courseData['totalRating']} (${(_controller.courseData['totalRating'] * 500).toInt()})'
-                                      : '',
-                                  style: const TextStyle(fontSize: 20),
+                                  '(${_controller.courseData['sub_category_id']})',
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Color.fromRGBO(153, 153, 153, 1),
+                                  ),
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 5),
+                            const SizedBox(height: 2),
+                            Text(
+                              '${_controller.courseData['sub_category_id']} students',
+                              style: const TextStyle(
+                                color: Color.fromRGBO(102, 102, 102, 1),
+                                fontFamily: 'Poppins',
+                                fontSize: 10.0,
+                                // fontWeight: FontWeight.bold,
+                              ),
+                            ),
+
+                            const SizedBox(height: 15),
 
                             // Text(
                             //   'Completed Lessons: ${_controller.courseData['completedLessons']}',
                             //   style: const TextStyle(fontSize: 16.0),
                             // ),
-                            Text(
-                              'Mentor ${_controller.courseData['instructor_id']}',
-                              style: const TextStyle(
-                                fontSize: 16.0,
-                                // color: Colors.black54,
-                              ),
+                            Row(
+                              children: [
+                                const Text(
+                                  'Mentor',
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 14,
+                                    color: Color.fromRGBO(102, 102, 102, 1),
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                Text(
+                                  '${_controller.courseData['instructor_id'] ?? 'Unknown'}',
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    color: Color.fromRGBO(116, 85, 247, 1),
+                                    // color: Colors.black54,
+                                  ),
+                                ),
+                              ],
                             ),
+
                             const SizedBox(height: 5),
                             Row(
                               children: [
@@ -284,14 +377,13 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                             const SizedBox(height: 20),
 
                             Text(
-                              'BDT ${(_controller.courseData['price'] * 109.83).toStringAsFixed(2)}',
+                              'BDT ${NumberFormat('#,##0.00', 'en_US').format(_controller.courseData['price'] * 109.83)}',
                               style: const TextStyle(
                                 fontFamily: 'Poppins',
                                 fontSize: 20.0,
                                 color: Color.fromRGBO(102, 102, 102, 1),
                                 fontWeight: FontWeight.w700,
                                 height: 14.0 / 20.0,
-                                // textAlign: TextAlign.center,
                               ),
                             ),
                             const SizedBox(height: 12),
