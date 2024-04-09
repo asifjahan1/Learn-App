@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -303,7 +304,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                               style: const TextStyle(
                                 color: Color.fromRGBO(102, 102, 102, 1),
                                 fontFamily: 'Poppins',
-                                fontSize: 10.0,
+                                fontSize: 12.0,
                                 // fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -665,24 +666,20 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        // description er age row wise image and text oita
+                                                        // Description's introduction with image and text
                                                         Row(
                                                           children: [
                                                             SizedBox(
                                                               height: 12,
                                                               child:
                                                                   Image.asset(
+                                                                'images/Polygon6.png',
                                                                 fit: BoxFit
                                                                     .contain,
-                                                                alignment: Alignment
-                                                                    .centerLeft,
-                                                                'images/Polygon6.png',
-                                                                width: 50,
-                                                                height: 50,
                                                               ),
                                                             ),
-                                                            // const SizedBox(
-                                                            //     width: 10),
+                                                            const SizedBox(
+                                                                width: 16),
                                                             const Flexible(
                                                               child: Text(
                                                                 'Course Introduction',
@@ -694,7 +691,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                                       16.0,
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .bold,
+                                                                          .normal,
                                                                   color: Color
                                                                       .fromRGBO(
                                                                           102,
@@ -707,10 +704,15 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                           ],
                                                         ),
                                                         const SizedBox(
-                                                            height:
-                                                                10), // Add spacing between image/text and description
+                                                            height: 10),
                                                         Text(
-                                                          description ?? '',
+                                                          description != null &&
+                                                                  description
+                                                                          .length >
+                                                                      50
+                                                              ? '${description.substring(0, 50)}...'
+                                                              : description ??
+                                                                  '',
                                                           style:
                                                               const TextStyle(
                                                             fontSize: 14.0,
@@ -719,10 +721,8 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                         ),
                                                         if (description !=
                                                                 null &&
-                                                            description
-                                                                    .split(' ')
-                                                                    .length >
-                                                                100)
+                                                            description.length >
+                                                                50)
                                                           InkWell(
                                                             onTap: () {
                                                               setState(() {
@@ -731,18 +731,25 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                                     true;
                                                               });
                                                             },
-                                                            child:
-                                                                const Padding(
-                                                              padding: EdgeInsets
-                                                                  .symmetric(
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
                                                                       vertical:
                                                                           8.0),
                                                               child: Text(
-                                                                'Show more',
+                                                                description.length >
+                                                                        50
+                                                                    ? 'Show more'
+                                                                    : '',
                                                                 style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .blue,
+                                                                    const TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          116,
+                                                                          85,
+                                                                          247,
+                                                                          1),
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
@@ -750,10 +757,159 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                                               ),
                                                             ),
                                                           ),
+                                                        const SizedBox(
+                                                            height: 10),
+                                                        Row(
+                                                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            SizedBox(
+                                                              height: 12,
+                                                              child:
+                                                                  Image.asset(
+                                                                'images/Polygon6.png',
+                                                                fit: BoxFit
+                                                                    .contain,
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                                width: 16),
+                                                            const Flexible(
+                                                              child: Text(
+                                                                'Expressions for Discussion',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      'Poppins',
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          169,
+                                                                          169,
+                                                                          169),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                                width: 45),
+                                                            SizedBox(
+                                                              height: 16,
+                                                              child:
+                                                                  Image.asset(
+                                                                'images/lock.png',
+                                                                fit: BoxFit
+                                                                    .contain,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+
+                                                        const SizedBox(
+                                                            height: 10),
+                                                        Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                              height: 14,
+                                                              child:
+                                                                  Image.asset(
+                                                                'images/mic.png',
+                                                                fit: BoxFit
+                                                                    .contain,
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                                width: 9),
+                                                            const Flexible(
+                                                              child: Padding(
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            8.0),
+                                                                child: Text(
+                                                                  'How Ask for & Provide Information',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontFamily:
+                                                                        'Poppins',
+                                                                    fontSize:
+                                                                        16.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    color: Color
+                                                                        .fromRGBO(
+                                                                            102,
+                                                                            102,
+                                                                            102,
+                                                                            1),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 10),
+                                                        Row(
+                                                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            SizedBox(
+                                                              height: 11.5,
+                                                              child:
+                                                                  Image.asset(
+                                                                'images/document 1.png',
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                                width: 16),
+                                                            const Flexible(
+                                                              child: Text(
+                                                                'Emmergency Vocabulary',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      'Poppins',
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          169,
+                                                                          169,
+                                                                          169),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                                width: 58),
+                                                            SizedBox(
+                                                              height: 16,
+                                                              child:
+                                                                  Image.asset(
+                                                                'images/lock.png',
+                                                                fit: BoxFit
+                                                                    .contain,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
                                                 ),
+
                                               //
                                               //
                                               //
