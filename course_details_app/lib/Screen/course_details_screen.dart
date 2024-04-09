@@ -539,7 +539,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 30),
 
                             // Display descriptions here
                             // Show more button functionality here
