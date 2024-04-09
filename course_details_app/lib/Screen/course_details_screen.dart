@@ -328,9 +328,9 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
-                                  '${_controller.courseData['instructor_id'] ?? 'Unknown'}',
+                                  '${_controller.courseData['instructor_name'] ?? 'Unknown'}',
                                   style: const TextStyle(
-                                    fontSize: 16.0,
+                                    fontSize: 14.0,
                                     color: Color.fromRGBO(116, 85, 247, 1),
                                     // color: Colors.black54,
                                   ),
